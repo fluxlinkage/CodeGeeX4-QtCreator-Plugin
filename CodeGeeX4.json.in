@@ -1,0 +1,11 @@
+﻿{
+    "Name" : "CodeGeeX4",
+    "Version" : "${IDE_VERSION}",
+    "CompatVersion" : "${IDE_VERSION_COMPAT}",
+    "Vendor" : "fluxlinkage@sina.com",
+    "Copyright" : "(C) 2024",
+    "License" : "This plugin may be used under the terms of the GNU General Public License version 3 as published by the Free Software Foundation. Please review the following information to ensure the GNU General Public License requirements will be met: https://www.gnu.org/licenses/gpl-3.0.html.",
+    "Description" : "CodeGeeX4 support",
+    "Url" : "https://github.com/fluxlinkage/CodeGeeX4-QtCreator-Plugin",
+    ${IDE_PLUGIN_DEPENDENCIES}
+}
