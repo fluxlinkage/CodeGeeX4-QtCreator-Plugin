@@ -65,13 +65,18 @@ class CodeGeeX4Plugin final : public ExtensionSystem::IPlugin
 public:
     void initialize() final
     {
-        QTranslator *translator=new QTranslator(QApplication::instance());
         QTimeZone localPosition = QDateTime::currentDateTime().timeZone();
         if(QLocale::Country::China==localPosition.country()){
+            QTranslator *translator=new QTranslator(QApplication::instance());
             if(translator->load("CodeGeeX4_zh_CN",QApplication::applicationDirPath()+"/../share/qtcreator/translations")){
                 QApplication::installTranslator(translator);
+            }else{
+                delete translator;
             }
         }
+        settings().readSettings();
+        restartClient();
+
         ActionBuilder requestAction(this,  Constants::CODEGEEX4_REQUEST_SUGGESTION);
         requestAction.setText(Tr::tr("Request CodeGeeX4 Suggestion"));
         requestAction.setToolTip(Tr::tr(

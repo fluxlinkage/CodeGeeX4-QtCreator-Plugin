@@ -93,50 +93,6 @@ void CodeGeeX4ClientInterface::replyFinished()
         QJsonArray ary=obj.value("choices").toArray();
         QJsonObject obj2=ary.first().toObject();
         QString str=obj2.value("text").toString();
-        // QJsonArray ary=obj.value("data").toArray();
-        // QString str=ary.first().toString();
-        // int firstLnPos=str.indexOf('\n');
-        // if(firstLnPos>0&&str.left(firstLnPos).contains("language")){
-        //     str=str.mid(firstLnPos+1);
-        // }
-        // int headI=0;
-        // if(m_row>0){
-        //     int r=0;
-        //     for(int i=0;i<qMin(m_pos,str.length());i++){
-        //         if(str.at(i).unicode()=='\n'){
-        //             r++;
-        //             if(r==m_row){
-        //                 headI=i+1;
-        //                 break;
-        //             }
-        //         }
-        //     }
-        // }
-        // if(m_row>0&&headI==0){
-        //     str=str.mid(m_pos);
-        // }else{
-        //     str=str.mid(headI+m_col);
-        // }
-        // // if(CodeGeeX4Settings::instance().braceBalance.value()){
-        // //     for(int i=0;i<str.length();i++){
-        // //         const QChar &ch=str.at(i);
-        // //         if(ch=='{'){
-        // //             m_braceLevel++;
-        // //         }else if(ch=='}'){
-        // //             m_braceLevel--;
-        // //             if(m_braceLevel<0){
-        // //                 int j;
-        // //                 for(j=i-1;j>=0;j--){
-        // //                     if(!str.at(j).isSpace()){
-        // //                         break;
-        // //                     }
-        // //                 }
-        // //                 str=str.left(j+1);
-        // //                 break;
-        // //             }
-        // //         }
-        // //     }
-        // // }
         QJsonObject responseRangeObj;
         responseRangeObj.insert("start",m_position);
         responseRangeObj.insert("end",m_position);
@@ -342,9 +298,11 @@ void CodeGeeX4ClientInterface::sendData(const QByteArray &data)
                 }
                 //QString prompt;
                 //上下文
-                prompt+="###PATH:"+fileInfo.fileName()+"\n";
+                prompt+="<|user|>\n###PATH:"+fileInfo.fileName()+"\n";
                 if(langCode!="None"){
                     prompt+="###LANGUAGE:"+langCode+"\n";
+                }else{
+                    prompt+="###LANGUAGE:\n";
                 }
                 prompt += "###MODE:BLOCK\n<|code_suffix|>"+contextSuffix;
                 prompt += "<|code_prefix|>"+contextPrefix;
