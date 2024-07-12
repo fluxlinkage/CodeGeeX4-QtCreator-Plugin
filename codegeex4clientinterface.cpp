@@ -298,7 +298,7 @@ void CodeGeeX4ClientInterface::sendData(const QByteArray &data)
                 }
                 //QString prompt;
                 //上下文
-                prompt+="<|user|>\n###PATH:"+fileInfo.fileName()+"\n";
+                prompt+="###PATH:"+fileInfo.fileName()+"\n";
                 if(langCode!="None"){
                     prompt+="###LANGUAGE:"+langCode+"\n";
                 }else{
