@@ -1,5 +1,7 @@
 # CodeGeeX4-QtCreator-Plugin
 支持CodeGeeX4模型的Qt Creator插件
+# 更新
+2024/09/06 - 改用OpenAI兼容API，可以使用通用的服务端了。
 # 简介
 支持本地或网络部署的[CodeGeeX4模型](https://github.com/THUDM/CodeGeeX4)。
 目前不支持连接到[CodeGeeX官网](https://codegeex.cn/)。
@@ -23,7 +25,13 @@ Qt Creator建议13.0及以上版本。Qt开发环境的版本需要与Qt Creator
 5. sudo make install
 # 使用
 首先部署好[CodeGeeX4模型](https://github.com/THUDM/CodeGeeX4)。
-可以使用这个[简单服务器端](https://github.com/fluxlinkage/SimpleCodeGeeX4Server)。注意：局域网部署请加入“--listen 0.0.0.0”参数。另外，确保防火墙没有拦截服务。
-在Qt Creator中选择“编辑”>“Preference”，找到“CodeGeeX4”项目，设置参数。局域网使用尤其注意修改IP设置。
+推荐使用[Ollama](https://ollama.com)。
+在使用插件前，首先使用如下代码下载模型。配置好一些的同学可以尝试codegeex4:9b-all-q8_0等不同的量化。
+```bash
+ollama run codegeex4
+```
+下载完成后`/bye`退出对话。以后在使用插件时保证ollama服务在后台运行即可。
+注意：局域网部署请设置`OLLAMA_ORIGINS`为`*`，`OLLAMA_HOST`为`0.0.0.0:11434`（或者其他端口）。另外，确保防火墙没有拦截服务。
+在Qt Creator中选择“编辑”>“Preference”，找到“CodeGeeX4”项目，设置参数。模型名称要和ollama下载的模型完全一样。局域网使用尤其注意修改IP设置。
 设置完成后应该可以使用了。敲一段代码，停顿几秒（和你显卡性能及参数设置有关），会出现提示。
 按“Tab”键接受，按“Ctrl+右”组合键接受一个单词。还有“接受一行”功能，目前只能鼠标点击，没有快捷键。
